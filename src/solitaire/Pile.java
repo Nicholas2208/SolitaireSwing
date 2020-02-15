@@ -1,5 +1,6 @@
 package solitaire;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 import javax.swing.JPanel;
@@ -13,6 +14,25 @@ public abstract class Pile extends JPanel {
 		super.setLocation(x, y);
 		cards = new Stack<>();
 		
+	}
+	
+	public Card topCard() {
+		if(!this.cards.isEmpty()) {
+			return this.cards.peek();
+		}
+		return null;
+	}
+	
+	public Card pop() {
+		try {
+			return cards.pop();
+		}catch(EmptyStackException ese) {
+			return null;
+		}
+	}
+	
+	public void push(Card someCard) {
+		this.cards.push(someCard);
 	}
 	
 	public boolean isEmpty() {

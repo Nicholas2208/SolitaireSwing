@@ -10,6 +10,11 @@ public class Deck extends Pile {
 	public Deck(int x, int y) {
 		super(x, y);
 		super.setSize(72, 96);
+		for(Suit suit : Suit.values()) {
+			for(int j = 1; j <= 13; ++j) {
+				push(new Card(j, suit));
+			}
+		}
 	}
 
 	@Override
