@@ -14,22 +14,27 @@ public class Card {
 	private int value;
 	private String suit;
 	private boolean faceUp;
-	
+	private Colour colour;
 
 	public Card(int value, Suit suit) {
 		this.value = value;
 		switch(suit) {
 		case Clubs:
 			this.suit = "c";
+			colour = Colour.Black;
 			break;
 		case Diamonds:
 			this.suit = "d";
+			colour = Colour.Red;
 			break;
 		case Spades:
 			this.suit = "s";
+			colour = Colour.Black;
 			break;
 		case Hearts:
 			this.suit = "h";
+			colour = Colour.Red;
+			break;
 		}
 		
 		faceUp = false;
@@ -78,6 +83,12 @@ public class Card {
 
 
 
+	public Colour getColour() {
+		return colour;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return value + " of " + suit ;
@@ -103,6 +114,18 @@ public class Card {
 				Card.class.getResource(directory + "/" + cardBackFilename + extension));
 		Image image = ii.getImage();
 		return image;
+	}
+
+
+
+	public int getValue() {
+		return value;
+	}
+
+
+
+	public String getSuit() {
+		return suit;
 	}
 
 

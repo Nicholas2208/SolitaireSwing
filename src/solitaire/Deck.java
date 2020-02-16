@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.Collections;
 
 public class Deck extends Pile {
 
@@ -15,6 +16,8 @@ public class Deck extends Pile {
 				push(new Card(j, suit));
 			}
 		}
+		
+		Collections.shuffle(cards);
 	}
 
 	@Override

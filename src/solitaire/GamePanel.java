@@ -21,6 +21,9 @@ public class GamePanel extends JPanel {
 		super.setLayout(null);
 		initializePiles();
 		
+		GameMoveListener l = new GameMoveListener();
+		addMouseListener(l);
+		addMouseMotionListener(l);
 	}
 
 
@@ -42,6 +45,18 @@ public class GamePanel extends JPanel {
 					tableauIndex + 1);
 			add(tableau[tableauIndex - 1]);
 		}
+	}
+
+
+
+	public static Foundation[] getFoundationPiles() {
+		return foundationPiles;
+	}
+
+
+
+	public static Waste getWastePile() {
+		return waste;
 	}
 
 
