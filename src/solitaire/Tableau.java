@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Tableau extends Pile {
 
@@ -60,13 +62,13 @@ public class Tableau extends Pile {
 			return this.topCard().getValue() == card.getValue() + 1
 					&& !this.topCard().getColour().equals(card.getColour());
 		}
-		return card.getValue() == 13; // King
+		return card.getValue() == 13;
 	}
-	
+
 	public boolean moveTo(Foundation destination, Card card) {
-		if(destination.accepts(card)) {
+		if (destination.accepts(card)) {
 			destination.push(this.pop());
-			if(!this.isEmpty()) {
+			if (!this.isEmpty()) {
 				this.topCard().showFace();
 			}
 			return true;
@@ -75,12 +77,24 @@ public class Tableau extends Pile {
 	}
 
 	public void moveTo(Tableau destination, Card card) {
-		if (destination.accepts(card)) {
-			destination.push(this.pop());
+		if (!this.isEmpty() || card.getValue() == 13) {
+			if (destination.accepts(card)) {
+                 Deque<Card> toBeMovedCards = new ArrayDeque<>();
+                 while(!this.isEmpty()) {
+                	 Card tmp = this.pop();
+                	 toBeMovedCards.push(tmp);
+                	 if(tmp.equals(card)) {
+                		 break;
+                	 }
+                 }
+                 while(!toBeMovedCards.isEmpty()) {
+                	 destination.push(toBeMovedCards.pop());
+                 }
+			}
 		}
-
-		if (!this.isEmpty()) {
-			topCard().showFace();
+		
+		if(!this.isEmpty()) {
+			this.topCard().showFace();
 		}
 	}
 
